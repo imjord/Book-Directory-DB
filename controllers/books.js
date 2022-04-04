@@ -30,11 +30,11 @@ const BookController = {
             title: req.body.title,
             author: req.body.author
         })
-
+        console.log(req.body)
      // save in database 
      newBook.save()
      .then(data => {
-         res.json(data);
+         res.send(data);
      }).catch(err => {
          res.status(500).send({
              message: err.message || "error when creating book "
