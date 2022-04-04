@@ -14,16 +14,29 @@ const BookController = {
         })
     },
 
+    // get a single book by id 
+
+    getSingleBook(req,res){
+        Book.findById({_id: req.params.id}).then(data=> res.json(data));
+    },
+
+    // update a book
+    updateBook(req,res){
+       Book.findOneAndUpdate({_id: req.params.id}, req.body, {new:true}).then(data => res.json(data))
+
+    },
+
+    // delete a book
+
+    deleteBook(req,res){
+        Book.deleteOne({_id: req.params.id}, {new:true}).then(data => res.json(data))
+    },
+
     // create a book 
 
     postBook(req,res) {
         console.log(req.body)
-          // validate body request 
-    // if(!req.body.author){
-    //     return res.status(400).send({
-    //         message: "Book cannot be empty!"
-    //     })
-    // }
+    
 
 
         const newBook = new Book({
@@ -44,6 +57,9 @@ const BookController = {
     }
 
 }
+
+
+
 
 
 module.exports = BookController;
